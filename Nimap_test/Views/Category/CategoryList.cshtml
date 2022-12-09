@@ -1,0 +1,24 @@
+﻿@model List<Nimap_test.Context.tbl_category>
+@{
+    ViewBag.Title = "CategoryList";
+}
+
+<h2>CategoryList</h2>
+<table class="table-hover table">
+    <tr>
+        <th>Category Id</th>
+        <th>Category Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryID</td>
+            <td>@item.CategoryName</td>
+            <td>
+                <a href="@Url.Action("Category",new { item.CategoryID,item.CategoryName})" class=" btn btn-success" >Edit</a>
+                <a href="@Url.Action("Delete",new { item.CategoryID})" class="btn btn-danger" >Delete</a>
+            </td>
+        </tr>
+    }
+</table>

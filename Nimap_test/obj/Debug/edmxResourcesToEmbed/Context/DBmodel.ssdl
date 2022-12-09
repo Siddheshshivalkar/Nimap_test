@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="productdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CategoryID">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="1" />
+    <End Role="tbl_product" Type="Self.tbl_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="tbl_product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="productdbModelStoreContainer">
+    <EntitySet Name="tbl_category" EntityType="Self.tbl_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_product" EntityType="Self.tbl_product" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CategoryID" Association="Self.FK_CategoryID">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_product" EntitySet="tbl_product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
